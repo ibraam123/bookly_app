@@ -15,7 +15,7 @@ class HomeViewBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const FeaturedBooksListView(),
-          Text('Beat Seller' , style: Styles.titleMedium,),
+          Text('Best Seller' , style: Styles.titleMedium,),
         ],
       ),
     );
