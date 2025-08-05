@@ -14,7 +14,6 @@ abstract class Styles {
   );
   static final TextStyle textStyle20 = TextStyle(
     fontSize: 20.sp,
-    fontFamily: kGtSectraFine,
   );
 
   static final TextStyle textStyle14 = TextStyle(fontSize: 14.sp);
