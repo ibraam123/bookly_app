@@ -5,17 +5,21 @@ import '../../../../../constants.dart';
 import '../../../../../core/utils/assets.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({super.key, required this.iconActionButton, this.iconLeading, required this.showImage});
+  final IconButton iconActionButton;
+  final IconButton? iconLeading;
+  final bool showImage;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: kPrimaryColor,
-      title: Image.asset(Assets.logo, height: 20.h),
+      title: showImage ? Image.asset(Assets.logo, height: 20.h) : null,
       actions: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.search, size: 30 , color: Colors.white, )),
+        iconActionButton,
       ],
+      leading: iconLeading,
     );
   }
 

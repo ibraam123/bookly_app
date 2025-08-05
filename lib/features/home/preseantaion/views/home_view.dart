@@ -8,8 +8,14 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(),
-        body: HomeViewBody(),
+      appBar: CustomAppBar(
+        iconActionButton: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.search, size: 30, color: Colors.white),
+        ),
+        showImage: true,
+      ),
+      body: HomeViewBody(),
     );
   }
 }
