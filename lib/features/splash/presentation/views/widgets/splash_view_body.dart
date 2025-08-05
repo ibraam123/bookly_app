@@ -1,5 +1,8 @@
+import 'package:bookly_app/constants.dart';
 import 'package:bookly_app/core/utils/assets.dart';
+import 'package:bookly_app/features/home/preseantaion/views/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -13,10 +16,12 @@ class _SplashViewBodyState extends State<SplashViewBody>
   late AnimationController _animationController;
   late Animation<Offset> _slidingAnimation;
 
+  // in init state making a code by single solid principle
   @override
   void initState() {
     super.initState();
     _initSlidingAnimation();
+    _navigateToHome();
   }
 
   @override
@@ -28,13 +33,23 @@ class _SplashViewBodyState extends State<SplashViewBody>
   void _initSlidingAnimation() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 2),
     );
     _slidingAnimation = Tween<Offset>(
-      begin: const Offset(0, 10),
+      begin: const Offset(0, 6),
       end: Offset.zero,
     ).animate(_animationController);
     _animationController.forward();
+  }
+
+  void _navigateToHome() {
+    Future.delayed(const Duration(seconds: 3), () {
+      Get.to(
+        () => const HomeView(),
+        transition: Transition.fade,
+        duration: kTransitionDuration,
+      );
+    });
   }
 
   @override
@@ -63,4 +78,3 @@ class _SplashViewBodyState extends State<SplashViewBody>
     );
   }
 }
-
