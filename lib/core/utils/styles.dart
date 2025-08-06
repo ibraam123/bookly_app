@@ -9,7 +9,7 @@ abstract class Styles {
   );
   static final TextStyle textStyle30 = TextStyle(
     fontSize: 30.sp,
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.bold,
     fontFamily: kGtSectraFine,
   );
   static final TextStyle textStyle20 = TextStyle(
