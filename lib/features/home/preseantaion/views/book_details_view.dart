@@ -11,7 +11,9 @@ class BookDetailsView extends StatelessWidget {
       appBar: CustomAppBar(
         iconActionButton: IconButton(onPressed: (){}, icon: Icon(Icons.shopping_cart ,size: 30 , color:  Colors.white, )),
         showImage: false,
-        iconLeading: IconButton(onPressed: (){}, icon: Icon(Icons.close_outlined ,size: 30 , color:  Colors.white, )),
+        iconLeading: IconButton(onPressed: (){
+          Navigator.pop(context);
+        }, icon: Icon(Icons.close_outlined ,size: 30 , color:  Colors.white, )),
       ),
       body: const BookDetailsViewBody(),
     );
