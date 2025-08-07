@@ -18,7 +18,7 @@ class HomeView extends StatelessWidget {
         ),
         showImage: true,
       ),
-      body: HomeViewBody(),
+       body: HomeViewBody(),
     );
   }
 }

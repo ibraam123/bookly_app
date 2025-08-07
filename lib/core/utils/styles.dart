@@ -8,7 +8,7 @@ abstract class Styles {
     fontWeight: FontWeight.w600,
   );
   static final TextStyle textStyle30 = TextStyle(
-    fontSize: 30.sp,
+    fontSize: 20.sp,
     fontWeight: FontWeight.bold,
     fontFamily: kGtSectraFine,
   );

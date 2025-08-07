@@ -1,39 +1,41 @@
+import 'package:bookly_app/constants.dart';
+import 'package:bookly_app/core/utils/styles.dart';
+import 'package:bookly_app/features/home/preseantaion/views/widgets/book_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../constants.dart';
-import '../../../../../core/utils/assets.dart';
-import '../../../../../core/utils/styles.dart';
-import 'book_rating.dart';
+import '../../../data/models/book_model.dart';
+import 'custom_list_view_item.dart';
 
 class CustomSellerListViewItem extends StatelessWidget {
-  const CustomSellerListViewItem({super.key});
+  const CustomSellerListViewItem({super.key, required this.book});
+  final BookModel book;
+
+  String _getAuthorsText() {
+    if (book.volumeInfo?.authors == null || book.volumeInfo!.authors!.isEmpty) {
+      return 'Unknown Author';
+    }
+    return book.volumeInfo!.authors!.join(', ');
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push('/book_details');
+        GoRouter.of(context).push("/book_details", extra: book);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: SizedBox(
-          width: double.infinity,
+          width: MediaQuery.of(context).size.width,
           height: 115.h,
           child: Row(
             children: [
-              AspectRatio(
-                aspectRatio: 2.5 / 4,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    image: const DecorationImage(
-                      image: AssetImage(Assets.books),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
+              CustomBookImage(
+                noNavigate: false,
+                imageUrl: book.volumeInfo?.imageLinks?.thumbnail ?? '',
+                bookModel: book,
               ),
               SizedBox(width: 20.w),
               Expanded(
@@ -41,7 +43,7 @@ class CustomSellerListViewItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Harry Potter and the goblet Fire',
+                      book.volumeInfo!.title!,
                       style: Styles.textStyle20.copyWith(
                         fontFamily: kGtSectraFine,
                         fontWeight: FontWeight.bold,
@@ -50,18 +52,25 @@ class CustomSellerListViewItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     SizedBox(height: 5.h),
-                    Text('By Author Name', style: Styles.textStyle14),
+                    Text(
+                      _getAuthorsText(),
+                      overflow: TextOverflow.ellipsis,
+                      style: Styles.textStyle14,
+                    ),
                     SizedBox(height: 10.h),
                     Row(
                       children: [
                         Text(
-                          "19.99 e",
+                          'Free',
                           style: Styles.textStyle20.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Spacer(),
-                        const BookRating(),
+                        const Spacer(),
+                        BookRating(
+                            rating: 4,
+                            count: 250
+                        ),
                       ],
                     ),
                   ],

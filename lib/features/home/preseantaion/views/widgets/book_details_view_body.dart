@@ -1,4 +1,5 @@
 import 'package:bookly_app/core/utils/styles.dart';
+import 'package:bookly_app/features/home/data/models/book_model.dart';
 import 'package:bookly_app/features/home/preseantaion/views/widgets/book_rating.dart';
 import 'package:bookly_app/features/home/preseantaion/views/widgets/custom_list_view_item.dart';
 import 'package:bookly_app/features/home/preseantaion/views/widgets/similar_box_list_view.dart';
@@ -7,7 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'box_action.dart';
 
 class BookDetailsViewBody extends StatelessWidget {
-  const BookDetailsViewBody({super.key});
+  const BookDetailsViewBody({super.key, required this.bookModel});
+  final BookModel bookModel;
 
   @override
   Widget build(BuildContext context) {
@@ -20,24 +22,30 @@ class BookDetailsViewBody extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 80.w),
-                child: const CustomBookImage(),
+                child: CustomBookImage(
+                  imageUrl: bookModel.volumeInfo?.imageLinks?.thumbnail ,
+                  bookModel: bookModel,
+                  noNavigate: true,
+                ),
               ),
               SizedBox(height: 10.h),
               Text(
-                "The Jungle Book", // Replace with localization or dynamic data
+                bookModel.volumeInfo?.title ?? "No Title", // Replace with localization or dynamic data,
                 style: Styles.textStyle30,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 4.h),
               Text(
-                "okay I am Harry", // Replace with localization or dynamic data
-                style: Styles.textStyle18,
+                bookModel.volumeInfo!.authors![0], // Replace with localization or dynamic data
+                style: Styles.textStyle16,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 10.h),
-              const BookRating(mainAxisAlignment: MainAxisAlignment.center),
+              const BookRating(mainAxisAlignment: MainAxisAlignment.center, rating:4, count: 250,),
               SizedBox(height: 30.h),
-              const BooksAction(),
+              BooksAction(
+                bookModel: bookModel,
+              ),
               SizedBox(height: 40.h),
                Align(
                 alignment: Alignment.centerLeft,
